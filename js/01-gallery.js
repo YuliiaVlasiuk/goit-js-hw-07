@@ -26,14 +26,40 @@ return array.map(({preview,original,description})=>
 
 gallery.addEventListener('click',openOriginalGallery);
 
-function openOriginalGallery(evt){
- if (!evt.target.classList.contains('gallery__image') ){
-    return
- }
- console.log(evt.target);
 
-console.log(evt.target.src);
-console.log(evt.target.dataset.source);
+
+function openOriginalGallery(evt){
+evt.preventDefault();
+
+if (!evt.target.classList.contains('gallery__image') ){
+     return
 }
+// console.log(evt.target);
+
+// console.log(evt.target.src);
+// console.log(evt.target.dataset.source);
+
+const instance = basicLightbox.create(`
+	<img
+    class="gallery__image"
+    src="${evt.target.dataset.source}"
+     alt="${evt.target.description}"
+  />
+`)
+instance.show();
+
+}
+
+// let counter=0;
+
+// document.addEventListener('scroll', onScroll)
+
+// function onScroll(evt){
+//     console.log(evt);
+//     counter +=1;
+//     console.log(counter);
+// }
+
+
 
 
