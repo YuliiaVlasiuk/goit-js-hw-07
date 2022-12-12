@@ -1,7 +1,7 @@
 import { galleryItems } from './gallery-items.js';
 // Change code below this line
 
-console.log(galleryItems);
+let originalGallery;
 
 const gallery=document.querySelector('.gallery');
 const arrayOfDiv=createGalleryMarkup(galleryItems);
@@ -26,29 +26,32 @@ return array.map(({preview,original,description})=>
 
 gallery.addEventListener('click',openOriginalGallery);
 
-
-
 function openOriginalGallery(evt){
 evt.preventDefault();
 
 if (!evt.target.classList.contains('gallery__image') ){
      return
 }
-// console.log(evt.target);
 
-// console.log(evt.target.src);
-// console.log(evt.target.dataset.source);
-
-const instance = basicLightbox.create(`
+originalGallery = basicLightbox.create(`
 	<img
     class="gallery__image"
     src="${evt.target.dataset.source}"
      alt="${evt.target.description}"
   />
 `)
-instance.show();
 
+originalGallery.show();
+document.addEventListener("keydown", closeOriginalGalleryEscape);
 }
+
+function closeOriginalGalleryEscape(evt) {
+if (evt.code === "Escape") {
+  originalGallery.close();
+  documents.removeEventListener("keydown", closeOriginalGalleryEscape);
+}
+}
+
 
 // let counter=0;
 
